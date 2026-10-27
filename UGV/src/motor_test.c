@@ -90,3 +90,13 @@ Motor_Status MotorTest_RunSequence(void)
 
     return MOTOR_OK;
 }
+
+Motor_Status MotorTest_SetCommand(uint32_t pulse_us)
+{
+    if (motor_test_initialized == 0U)
+    {
+        return MOTOR_ERROR_INVALID_ARGUMENT;
+    }
+
+    return Motor_SetPulseUs(pulse_us);
+}

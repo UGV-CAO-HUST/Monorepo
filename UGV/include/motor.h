@@ -5,8 +5,10 @@
 #include <stdint.h>
 
 /* ESC pulse-width safety limits, in microseconds */
-#define MOTOR_MIN_PULSE_US  1000U
-#define MOTOR_MAX_PULSE_US  2000U
+#define MOTOR_MIN_PULSE_US      1000U
+#define MOTOR_MAX_PULSE_US      2000U
+#define MOTOR_NEUTRAL_PULSE_US  1500U
+#define MOTOR_PWM_PERIOD_US     20000U  /* 50 Hz */
 
 typedef enum
 {
@@ -22,10 +24,11 @@ typedef enum
  * channel: Timer channel, e.g. TIM_CHANNEL_1.
  *
  * REQUIREMENT:
- * Configure the timer counter to tick at exactly 1 MHz
- * (one counter tick per microsecond).
+ * The timer counter must already tick at exactly 1 MHz
+ * (one counter tick per microsecond). Board_Init() derives
+ * the TIM3 prescaler from the APB1 timer clock.
  *
- * Starts PWM with a 1500 us pulse.
+ * Starts PWM with a 1500 us pulse at 50 Hz.
  */
 Motor_Status Motor_Init(TIM_HandleTypeDef *htim, uint32_t channel);
 

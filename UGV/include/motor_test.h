@@ -6,8 +6,8 @@
 /* ESC test configuration */
 #define MOTOR_TEST_PERIOD_US       20000U  /* 50 Hz */
 #define MOTOR_TEST_NEUTRAL_US      1500U
-#define MOTOR_TEST_FORWARD_US      1400U
-#define MOTOR_TEST_REVERSE_US      1600U
+#define MOTOR_TEST_FORWARD_US      1300U
+#define MOTOR_TEST_REVERSE_US      1700U
 
 #define MOTOR_TEST_ARM_DELAY_MS    3000U
 #define MOTOR_TEST_RUN_DELAY_MS    2000U
@@ -32,5 +32,15 @@ Motor_Status MotorTest_Init(TIM_HandleTypeDef *htim, uint32_t channel);
  * This function blocks while the sequence runs.
  */
 Motor_Status MotorTest_RunSequence(void);
+
+/*
+ * Send a single ESC command.
+ *
+ * pulse_us: Command pulse width, 1000-2000 us.
+ *           1500 us is neutral (assuming ESC calibration).
+ *
+ * Returns MOTOR_OK on success.
+ */
+Motor_Status MotorTest_SetCommand(uint32_t pulse_us);
 
 #endif /* MOTOR_TEST_H */

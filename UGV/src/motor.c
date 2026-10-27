@@ -4,8 +4,8 @@
 static TIM_HandleTypeDef *motor_htim = NULL;
 static uint32_t motor_channel = 0U;
 
-static uint32_t motor_pulse_us = 1500U;
-static uint32_t motor_period_us = 20000U;
+static uint32_t motor_pulse_us = MOTOR_NEUTRAL_PULSE_US;
+static uint32_t motor_period_us = MOTOR_PWM_PERIOD_US;
 
 /*
  * Initialize the PWM output.
@@ -20,8 +20,8 @@ Motor_Status Motor_Init(TIM_HandleTypeDef *htim, uint32_t channel)
     motor_htim = htim;
     motor_channel = channel;
 
-    motor_pulse_us = 1500U;
-    motor_period_us = 20000U;
+    motor_pulse_us = MOTOR_NEUTRAL_PULSE_US;
+    motor_period_us = MOTOR_PWM_PERIOD_US;
 
     /*
      * Set the period:
