@@ -15,31 +15,34 @@ int main(void)
         Error_Handler();
     }
 
+    while (1)
+    {
         debug_stage = 1;
-        if (Motor_SetPulseUs(1500U) != MOTOR_OK)
+        if (Motor_SetPulseUs(1550U) != MOTOR_OK)
         {
             Error_Handler();
         }
         HAL_Delay(5000U);
 
         debug_stage = 2;
-        if (Motor_SetPulseUs(1600U) != MOTOR_OK)
+        if (Motor_SetPulseUs(1400U) != MOTOR_OK)
         {
             Error_Handler();
         }
         HAL_Delay(5000U);
 
         debug_stage = 3;
-        if (Motor_SetPulseUs(1500U) != MOTOR_OK)
+        if (Motor_SetPulseUs(1400U) != MOTOR_OK)
         {
             Error_Handler();
         }
         HAL_Delay(5000U);
 
         debug_stage = 4;
-        if (Motor_SetPulseUs(1400U) != MOTOR_OK)
-        {   
+        if (Motor_SetPulseUs(1500U) != MOTOR_OK)
+        {
             Error_Handler();
         }
         HAL_Delay(5000U);
+    }
 }

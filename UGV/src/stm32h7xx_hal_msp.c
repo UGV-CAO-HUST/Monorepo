@@ -31,3 +31,8 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef *hspi)
             GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7);
     }
 }   
+
+void SysTick_Handler(void)
+{
+    HAL_IncTick();
+}
