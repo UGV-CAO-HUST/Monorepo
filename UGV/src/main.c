@@ -4,6 +4,18 @@
 
 volatile uint32_t debug_stage = 0;
 
+static void ramp_to(uint32_t target)
+{
+    uint32_t cur = Motor_GetPulseUs();
+    while (cur != target)
+    {
+        if (cur > target) { cur = (cur - 10U < target) ? target : cur - 10U; }
+        else              { cur = (cur + 10U > target) ? target : cur + 10U; }
+        Motor_SetPulseUs(cur);
+        HAL_Delay(50U);
+    }
+}
+
 int main(void)
 {
     HAL_Init();
@@ -17,32 +29,22 @@ int main(void)
 
     while (1)
     {
-        debug_stage = 1;
-        if (Motor_SetPulseUs(1550U) != MOTOR_OK)
-        {
-            Error_Handler();
-        }
-        HAL_Delay(5000U);
 
-        debug_stage = 2;
-        if (Motor_SetPulseUs(1400U) != MOTOR_OK)
-        {
-            Error_Handler();
-        }
-        HAL_Delay(5000U);
+        // once, at startup
+        Motor_SetPulseUs(1500U); HAL_Delay(5000U);
 
-        debug_stage = 3;
-        if (Motor_SetPulseUs(1400U) != MOTOR_OK)
-        {
-            Error_Handler();
-        }
-        HAL_Delay(5000U);
+        // forward
+        ramp_to(1550U); HAL_Delay(3000U);
 
-        debug_stage = 4;
-        if (Motor_SetPulseUs(1500U) != MOTOR_OK)
-        {
-            Error_Handler();
-        }
-        HAL_Delay(5000U);
+        // back to neutral, wait
+        Motor_SetPulseUs(1500U); HAL_Delay(200U);
+
+        // double-tap
+        Motor_SetPulseUs(1000U); HAL_Delay(200U);
+        Motor_SetPulseUs(1500U); HAL_Delay(200U);
+
+        // reverse, ramped
+        ramp_to(1420U); HAL_Delay(3000U);
+        Motor_SetPulseUs(1500U);
     }
 }
