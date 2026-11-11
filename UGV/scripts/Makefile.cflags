@@ -1,0 +1,2 @@
+print_cflags:
+	@echo -mcpu=cortex-m7 -mthumb -mfloat-abi=soft -Os -ffunction-sections -fdata-sections -specs=nano.specs
