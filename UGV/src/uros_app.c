@@ -27,8 +27,13 @@
 /* Neu > 0: qua ngan nay ms khong nhan lenh moi thi tra ESC ve neutral (an toan).
  * Dat 0 de tat. */
 #ifndef UROS_CMD_TIMEOUT_MS
-#define UROS_CMD_TIMEOUT_MS   500U
+#define UROS_CMD_TIMEOUT_MS   0U
 #endif
+
+static const uint32_t UROS_MOTOR_MIN_PULSE_US      = MOTOR_MIN_PULSE_US;
+static const uint32_t UROS_MOTOR_MAX_PULSE_US      = MOTOR_MAX_PULSE_US;
+static const uint32_t UROS_MOTOR_NEUTRAL_PULSE_US  = MOTOR_NEUTRAL_PULSE_US;
+static uint32_t       last_motor_pulse_us           = MOTOR_NEUTRAL_PULSE_US;
 
 typedef enum { UROS_INIT = 0, UROS_WAIT_AGENT, UROS_CONNECTED } uros_state_t;
 
